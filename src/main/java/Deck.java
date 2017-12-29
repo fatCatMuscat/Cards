@@ -44,14 +44,39 @@ public class Deck {
         }
     }
 
+    public int indexLowest(int lowIndex, int highIndex) {
+        int indexLowest = lowIndex;
+        for(int i = lowIndex; i < highIndex; i++) {
+            int j = i + 1;
+            if (this.cards[j].compareTo(this.cards[indexLowest]) < 0) {
+                indexLowest = j;
+            }
+        }
+        return indexLowest;
+    }
+
+    public Deck selectionSort() {
+        for (int i = 0; i < this.cards.length - 1; i++) {
+            swapCards(i, indexLowest(i, this.cards.length - 1));
+        }
+        return this;
+    }
+
+
+
     public static void main(String[] args) {
         Deck deck = new Deck();
         deck.printDeck();
-        System.out.println("Shuffling   -   Shuffling");
+        System.out.println();
+        System.out.println("/////////////////////////////////////////");
+        System.out.println();
         deck.shuffle();
         deck.printDeck();
-
-        /// check
+        System.out.println();
+        System.out.println("/////////////////////////////////////////");
+        System.out.println();
+        deck.selectionSort();
+        deck.printDeck();
     }
 
 
