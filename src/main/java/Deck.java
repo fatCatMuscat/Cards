@@ -50,6 +50,8 @@ public class Deck {
         System.out.println("Shuffling   -   Shuffling");
         deck.shuffle();
         deck.printDeck();
+
+        /// check
     }
 
 
