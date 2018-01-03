@@ -38,18 +38,6 @@ public class Card {
         return suit;
     }
 
-    public static Card[] makeDeck() {
-        Card[] cards = new Card[52];
-        int i = 0;
-        for (int suit = 0; suit <= 3; suit++) {
-            for (int rank = 1; rank <= 13; rank ++) {
-                cards[i] = new Card(rank, suit);
-                i++;
-            }
-        }
-        return cards;
-    }
-
     public static void printDeck (Card[] cards) {
         for (int i = 0; i < cards.length; i++) {
             System.out.println(cards[i]);

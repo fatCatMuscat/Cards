@@ -20,6 +20,14 @@ public class Deck {
         }
     }
 
+    public Deck subdeck(int low, int high) {
+        Deck sub = new Deck(high - low + 1);
+        for (int i = 0; i < sub.cards.length; i++) {
+            sub.cards[i] = this.cards[low + i];
+        }
+        return sub;
+    }
+
     public void printDeck() {
         for (int i = 0; i < this.cards.length; i++) {
             System.out.println(this.cards[i]);
@@ -44,6 +52,12 @@ public class Deck {
         }
     }
 
+    public void merge(Deck d1, Deck d2) {
+
+
+
+    }
+
     public int indexLowest(int lowIndex, int highIndex) {
         int indexLowest = lowIndex;
         for(int i = lowIndex; i < highIndex; i++) {
@@ -64,19 +78,15 @@ public class Deck {
 
 
 
+
+
     public static void main(String[] args) {
         Deck deck = new Deck();
         deck.printDeck();
         System.out.println();
-        System.out.println("/////////////////////////////////////////");
-        System.out.println();
-        deck.shuffle();
-        deck.printDeck();
-        System.out.println();
-        System.out.println("/////////////////////////////////////////");
-        System.out.println();
-        deck.selectionSort();
-        deck.printDeck();
+        deck.subdeck(10, 20).printDeck();
+
+
     }
 
 
