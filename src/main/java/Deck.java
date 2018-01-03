@@ -53,7 +53,13 @@ public class Deck {
     }
 
     public void merge(Deck d1, Deck d2) {
+        Deck result = new Deck(d1.cards.length + d2.cards.length);
+        int i = 0;
+        int j = 0;
+        for (int k = 0; k < result.cards.length; k++) {
+            
 
+        }
 
 
     }
