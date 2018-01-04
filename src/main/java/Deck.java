@@ -52,17 +52,56 @@ public class Deck {
         }
     }
 
-    public void merge(Deck d1, Deck d2) {
-        Deck result = new Deck(d1.cards.length + d2.cards.length);
-        int i = 0;
-        int j = 0;
+    public static Deck merge(Deck d1, Deck d2) {
+        // create the new deck
+        Deck result = new Deck (d1.cards.length + d2.cards.length);
+
+        int choice;    // records the winner (1 means d1, 2 means d2)
+        int i = 0;     // traverses the first input deck
+        int j = 0;     // traverses the second input deck
+
+        // k traverses the new (merged) deck
         for (int k = 0; k < result.cards.length; k++) {
-            
+            choice = 1;
 
+            // if d1 is empty, d2 wins; if d2 is empty, d1 wins; otherwise,
+            // compare the two cards
+            if (i == d1.cards.length)
+                choice = 2;
+            else if (j == d2.cards.length)
+                choice = 1;
+            else if (d1.cards[i].compareTo(d2.cards[j]) > 0)
+                choice = 2;
+
+            // make the new deck refer to the winner card
+            if (choice == 1) {
+                result.cards[k] = d1.cards[i];  i++;
+            } else {
+                result.cards[k] = d2.cards[j];  j++;
+            }
         }
-
-
+        return result;
     }
+
+    public Deck mergeSort() {
+        if (cards.length < 2) {
+            return this;
+        }
+        int mid = (cards.length-1) / 2;
+
+        // divide the deck roughly in half
+        Deck d1 = subdeck(0, mid);
+        Deck d2 = subdeck(mid+1, cards.length-1);
+
+        // sort the halves
+        d1 = d1.mergeSort();
+        d2 = d2.mergeSort();
+
+        // merge the two halves and return the result
+        // (d1 and d2 get garbage collected)
+        return merge(d1, d2);
+    }
+
 
     public int indexLowest(int lowIndex, int highIndex) {
         int indexLowest = lowIndex;
@@ -89,9 +128,17 @@ public class Deck {
     public static void main(String[] args) {
         Deck deck = new Deck();
         deck.printDeck();
-        System.out.println();
-        deck.subdeck(10, 20).printDeck();
 
+        System.out.println();
+
+        deck.shuffle();
+        deck.printDeck();
+
+        System.out.println();
+
+        Deck sortedDeck = deck.mergeSort();
+
+        sortedDeck.printDeck();
 
     }
 
